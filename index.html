@@ -26,6 +26,9 @@
         .syllabus-card { background: white; padding: 25px; border-radius: 15px; border-top: 8px solid var(--red); box-shadow: 0 10px 25px rgba(0,0,0,0.1); line-height: 1.8; text-align: justify; white-space: pre-wrap; }
         .highlight-unit { color: var(--red); font-weight: bold; font-size: 1.1rem; display: block; margin-top: 15px; border-left: 4px solid var(--red); padding-left: 10px; }
         .back-link { display: block; margin-top: 25px; color: var(--red); text-align: center; font-weight: bold; text-decoration: none; cursor: pointer; }
+        
+        /* New About Button Style */
+        .btn-about { background: transparent; color: var(--black); border: 2px solid var(--black); margin-top: 20px; width: 100%; }
     </style>
 </head>
 <body>
@@ -40,12 +43,14 @@
         <div id="p1" class="page active">
             <h3 style="text-align:center;">FOR STUDENT WELFARE</h3>
             <input type="text" id="nameInp" class="name-box" placeholder="Type name & hit space..." oninput="handleNameInput()">
+            <button class="btn btn-about" onclick="showPage('p7')">About This Portal</button>
         </div>
 
         <div id="p2" class="page">
             <h4 id="userTag" style="text-align:center; color:var(--red);"></h4>
             <div class="btn-grid" id="mainSubjectList"></div>
-            <button class="btn" style="margin-top:15px; background:var(--red);" onclick="openSEC()">SEC (Skill Enhancement Course)</button>
+            <button class="btn" style="margin-top:15px; background:var(--red);" onclick="openSEC()">NEW COURSE FOR 4th SEM</button>
+            <a class="back-link" onclick="goBack('p1')">← Back to Start</a>
         </div>
 
         <div id="p3" class="page">
@@ -68,7 +73,7 @@
         </div>
 
         <div id="p5" class="page">
-            <h3 style="text-align:center;">SEC: Select Subject</h3>
+            <h3 style="text-align:center;">NEW COURSE FOR 4th SEM: Select Subject</h3>
             <div class="btn-grid" id="secSubjectList"></div>
             <a class="back-link" onclick="goBack('p2')">← Back</a>
         </div>
@@ -78,6 +83,19 @@
                 <h3 id="syllabusTitle" style="text-align:center; border-bottom:1px solid #eee;"></h3>
                 <div id="syllabusBody"></div>
                 <a id="syllabusBackBtn" class="back-link">← Back</a>
+            </div>
+        </div>
+
+        <div id="p7" class="page">
+            <div class="syllabus-card">
+                <h3 style="text-align:center; color:var(--red);">ABOUT SECTION</h3>
+                <div id="aboutContent">
+                    This portal is designed for the welfare of students at Gangadhar Meher University. 
+                    It provides easy access to the syllabus for various subjects, including Major, Minor, and NEW COURSE FOR 4th SEM papers.
+                    
+                    Developed with the goal of making academic resources more accessible.
+                </div>
+                <a class="back-link" onclick="goBack('p1')">← Back</a>
             </div>
         </div>
     </div>
@@ -147,7 +165,8 @@ UNIT IV:
 The orthodox monetarist school, the Quantity Theory of Money approach, the expectations
 augmented Phillips curve analysis, the orthodox monetarist school and stabilization policy
 New Classical Economics: The influence of Robert e Lucas Jr, the structure of new classical
-models: the Rational Expectations hypothesis; and policy implications)`; const ECO_P10 = `UNIT I: 
+models: the Rational Expectations hypothesis; and policy implications)`; 
+        const ECO_P10 = `UNIT I: 
 (Data Collection and Measures of Central Tendency and Dispersion
 Basic concepts: population and sample, parameter and statistic; Data Collection: primary and
 secondary data, methods of collection of primary data; Presentation of Data: frequency distribution;
@@ -177,7 +196,8 @@ UNIT IV:
 Probability: Basic concepts, addition and multiplication rules, conditional probability; Meaning of
 Sampling, Types of Sampling: Probability Sampling verses Non-Probability Sampling; Simple
 Random Sampling and its selection, Systematic Sampling, Multi-stage Sampling, Quota Sampling;
-Error: Sampling and Non-sampling)`; const ECO_MINOR = `UNIT I: 
+Error: Sampling and Non-sampling)`; 
+        const ECO_MINOR = `UNIT I: 
 (Update Soon)
 
 UNIT II: 
@@ -187,7 +207,8 @@ UNIT III:
 (Update Soon)
 
 UNIT IV: 
-(Update Soon)`; const ECO_SEC = `UNIT I: 
+(Update Soon)`; 
+        const ECO_SEC = `UNIT I: 
 (Update Soon)
 
 UNIT II: 
@@ -250,7 +271,8 @@ UNIT IV:
 (Cultural Ideals:
 1. Religious tolerance and sulh-i-kul; Sufi mystical and Intellectual Interventions
 2. Art and Architecture
-3. Mughal and Rajput Paintings: Themes and Perspectives)`; const HIS_P10 = `UNIT I: 
+3. Mughal and Rajput Paintings: Themes and Perspectives)`; 
+        const HIS_P10 = `UNIT I: 
 (Meaning and Scope of History
 1. Definition, Nature and Scope of History.
 2. Object and Value of History.
@@ -273,7 +295,8 @@ UNIT IV:
 1. Sources of History: Written, Oral. Visual & Archaeological.
 2. Historical facts.
 3. Historical Causation.
-4. Historical Objectivity)`; const HIS_MINOR = `UNIT I: 
+4. Historical Objectivity)`; 
+        const HIS_MINOR = `UNIT I: 
 (Update Soon)
 
 UNIT II: 
@@ -283,7 +306,8 @@ UNIT III:
 (Update Soon)
 
 UNIT IV: 
-(Update Soon)`; const HIS_SEC = UNIT_TEMPLATE;
+(Update Soon)`; 
+        const HIS_SEC = UNIT_TEMPLATE;
 
         // 7. ODIA
         const ODI_P8 = UNIT_TEMPLATE; const ODI_P9 = UNIT_TEMPLATE; const ODI_P10 = UNIT_TEMPLATE; const ODI_MINOR = UNIT_TEMPLATE; const ODI_SEC = UNIT_TEMPLATE;
@@ -314,7 +338,8 @@ UNIT IV:
 (Party System and Electoral Process
 a) Indian party system: National and State parties, Trends in party system. Politics of
 Defection, Coalition Politics
-b) Electoral Process in India: Electoral reforms. Trends in voting behaviour)`; const POL_P9 = `UNIT I: 
+b) Electoral Process in India: Electoral reforms. Trends in voting behaviour)`; 
+        const POL_P9 = `UNIT I: 
 (Idealism and Socialism
 a) Hegel: Dialectical Idealism; Concept of State; Theory of Freedom
 b) Karl Marx: Dialectical Materialism: Historical Materialism; Concept of Class;
@@ -336,7 +361,8 @@ Obligation: Patriarchy. Contract and Property)
 UNIT IV: 
 (Contemporary Liberalism & Its Critics
 a) John Rawls: Justice as Fairness, Original Position. Veil of Ignorance
-b) Michel Foucault: Power and Freedom, Governmentality and Ethics)`; const POL_P10 = `UNIT I: 
+b) Michel Foucault: Power and Freedom, Governmentality and Ethics)`; 
+        const POL_P10 = `UNIT I: 
 (Introduction to Public Administration
 a) Public Administration as a Discipline: Meaning, Nature & Scope, Evolution
 b) Politics-Administration Dichotomy, Public vs. Private Administration
@@ -357,7 +383,8 @@ UNIT IV:
 (Public Administration in India
 a) Bureaucracy: Structure& Processes; Recruitment, Training, Ethics in Administration
 b) Contemporary challenges & Perspectives: e-Governance. Public-Private Partnership.
-State vs Market Debate)`; const POL_MINOR = UNIT_TEMPLATE; const POL_SEC = UNIT_TEMPLATE;
+State vs Market Debate)`; 
+        const POL_MINOR = UNIT_TEMPLATE; const POL_SEC = UNIT_TEMPLATE;
 
         // 9. SANSKRIT
         const SAN_P8 = UNIT_TEMPLATE; const SAN_P9 = UNIT_TEMPLATE; const SAN_P10 = UNIT_TEMPLATE; const SAN_MINOR = UNIT_TEMPLATE; const SAN_SEC = UNIT_TEMPLATE;
@@ -414,7 +441,9 @@ State vs Market Debate)`; const POL_MINOR = UNIT_TEMPLATE; const POL_SEC = UNIT_
 
         function loadManualSyllabus(type) {
             let content = DB[currentSubject][type];
-            document.getElementById('syllabusTitle').innerText = currentSubject + " - " + type.replace('P', 'Paper ');
+            // Updated title display logic
+            let displayType = type === 'SEC' ? 'NEW COURSE FOR 4th SEM' : type.replace('P', 'Paper ');
+            document.getElementById('syllabusTitle').innerText = currentSubject + " - " + displayType;
             document.getElementById('syllabusBody').innerHTML = content.replace(/(UNIT I:|UNIT II:|UNIT III:|UNIT IV:|UNIT-I:|UNIT-II:|UNIT-III:|UNIT-IV:)/gi, '<span class="highlight-unit">$1</span>');
             const bBtn = document.getElementById('syllabusBackBtn');
             if (type === 'MINOR') bBtn.onclick = () => showPage('p3');
@@ -432,7 +461,6 @@ State vs Market Debate)`; const POL_MINOR = UNIT_TEMPLATE; const POL_SEC = UNIT_
     </script>
 </body>
 </html>
-
 
 
 
