@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMU Portal | Subrat Kumar Ratha</title>
+    <style>
+        :root { --red: #a80000; --black: #121212; --white: #ffffff; --bg: #f8f9fa; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg); display: flex; min-height: 100vh; }
+        .border-side { width: 30px; background-color: var(--red); background-image: linear-gradient(135deg, var(--black) 25%, transparent 25%), linear-gradient(225deg, var(--black) 25%, transparent 25%), linear-gradient(45deg, var(--black) 25%, transparent 25%), linear-gradient(315deg, var(--black) 25%, var(--white) 25%); background-position: 10px 0, 10px 0, 0 0, 0 0; background-size: 20px 20px; border-right: 3px solid var(--black); flex-shrink: 0; }
+        .container { flex-grow: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .header { text-align: center; width: 100%; border-bottom: 4px double var(--red); padding-bottom: 10px; margin-bottom: 25px; }
+        .header h1 { margin: 0; color: var(--black); font-size: 1.3rem; text-transform: uppercase; }
+        .header h2 { margin: 5px 0; color: var(--red); font-size: 1rem; }
+        .dev-credit { font-size: 10px; color: #777; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase; }
+        .page { display: none; width: 100%; max-width: 600px; }
+        .active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .name-box { width: 100%; padding: 15px; font-size: 1.1rem; border: 2px solid var(--black); border-radius: 12px; text-align: center; outline: none; }
+        .btn-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+        .btn { background: var(--black); color: white; padding: 15px; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-transform: uppercase; }
+        .btn:active { background: var(--red); transform: scale(0.98); }
+        .btn-major { background: var(--red); }
+        .btn-minor { background: #444; }
+        .syllabus-card { background: white; padding: 25px; border-radius: 15px; border-top: 8px solid var(--red); box-shadow: 0 10px 25px rgba(0,0,0,0.1); line-height: 1.8; text-align: justify; white-space: pre-wrap; }
+        .highlight-unit { color: var(--red); font-weight: bold; font-size: 1.1rem; display: block; margin-top: 15px; border-left: 4px solid var(--red); padding-left: 10px; }
+        .back-link { display: block; margin-top: 25px; color: var(--red); text-align: center; font-weight: bold; text-decoration: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="border-side"></div>
+    <div class="container">
+        <div class="header">
+            <h1>GANGADHAR MEHER UNIVERSITY</h1>
+            <h2>SAMBALPUR, ODISHA</h2>
+            <div class="dev-credit">Developed by Subrat Kumar Ratha</div>
+        </div>
+
+        <div id="p1" class="page active">
+            <h3 style="text-align:center;">Enter Your Name</h3>
+            <input type="text" id="nameInp" class="name-box" placeholder="Type name & hit space..." oninput="handleNameInput()">
+        </div>
+
+        <div id="p2" class="page">
+            <h4 id="userTag" style="text-align:center; color:var(--red);"></h4>
+            <div class="btn-grid" id="mainSubjectList"></div>
+            <button class="btn" style="margin-top:15px; background:var(--red);" onclick="openSEC()">SEC (Skill Enhancement Course)</button>
+        </div>
+
+        <div id="p3" class="page">
+            <h3 id="selectedSubjectTag" style="text-align:center;"></h3>
+            <div class="btn-grid">
+                <button class="btn btn-major" onclick="showPage('p4')">MAJOR</button>
+                <button class="btn btn-minor" onclick="loadManualSyllabus('MINOR')">MINOR</button>
+            </div>
+            <a class="back-link" onclick="goBack('p2')">← Back</a>
+        </div>
+
+        <div id="p4" class="page">
+            <h3 style="text-align:center;">Select Major Paper</h3>
+            <div class="btn-grid">
+                <button class="btn" onclick="loadManualSyllabus('P8')">Paper VIII</button>
+                <button class="btn" onclick="loadManualSyllabus('P9')">Paper IX</button>
+                <button class="btn" onclick="loadManualSyllabus('P10')">Paper X</button>
+            </div>
+            <a class="back-link" onclick="goBack('p3')">← Back</a>
+        </div>
+
+        <div id="p5" class="page">
+            <h3 style="text-align:center;">SEC: Select Subject</h3>
+            <div class="btn-grid" id="secSubjectList"></div>
+            <a class="back-link" onclick="goBack('p2')">← Back</a>
+        </div>
+
+        <div id="p6" class="page">
+            <div class="syllabus-card">
+                <h3 id="syllabusTitle" style="text-align:center; border-bottom:1px solid #eee;"></h3>
+                <div id="syllabusBody"></div>
+                <a id="syllabusBackBtn" class="back-link">← Back</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const UNIT_TEMPLATE = `UNIT I: 
+(Update Soon)
+
+UNIT II: 
+(Update Soon)
+
+UNIT III: 
+(Update Soon)
+
+UNIT IV: 
+(Update Soon)`;
+
+        /* ========================================================
+           Syllabus Database - 100% Separate for each Subject
+           ======================================================== */
+
+        // 1. ECONOMICS
+        const ECO_P8 = `UNIT I: Firm Supply and Equilibrium
+Market Environments; Pure competition; Supply decision of a competitive firm and Exceptions;
+Inverse Supply Function; Profits and Producer’s Surplus; Long Run Supply Curve of a Firm; Long
+Run Average Costs; Short Run and Long Run Industry Supply; Industry Equilibrium in Short and
+Long Run; Meaning of Zero Profits; Economic Rent
+UNIT II: General Equilibrium
+The Edge worth Box; Trade; Pareto Efficient Allocations; Existence of equilibrium and efficiency;
+The Welfare Theorems and their implications; The Firm; Production and the Welfare Theorems ;
+Production possibilities, comparative advantage and Pareto efficiency
+UNIT III: Market Imperfections
+Barriers to Entry, Profit Maximization and Output Choice, Monopoly and resource Allocation,
+Monopoly, Product Quality and Durability, Price Discrimination, Second Degree Price
+Discrimination through Price Schedules, Regulation of Monopoly, Dynamic Views of Monopoly
+Oligopoly – Choosing a strategy; Quantity and price leadership; Simultaneous Quantity Setting;
+Example of Cournot Equilibrium; Simultaneous Price Setting; Collusion
+UNIT IV: Game Theory
+The Payoff Matrix of a Game; Nash Equilibrium; Mixed Strategies ;The Prisoner’s Dilemma;
+Repeated Games; Enforcing a cartel; Sequential Games; A Game of entry deterrence.`;
+        const ECO_P9 = `UNIT I: 
+(Modeling Economic Growth
+Accumulation of Capital in the basic Solow Model; supply and demand for goods, growth in the
+capital stock and the steady state, Golden rule level of capital: Comparing steady states, transition
+to the golden rule steady state with too much and too little capital, Population Growth,
+Technological Progress- Solow version, Beyond Solow Model and Endogenous Growth)
+
+UNIT II: 
+(Open Economy and Macroeconomic Policy
+Balance of payments- concept; meaning of equilibrium and disequilibrium in balance of payments;
+Determination of foreign exchange rate- the balance of payments theory; Fixed versus flexible
+exchange rates; Short-run open economy model- the basic Mundell-Fleming model;
+Macroeconomic Policies – Fiscal policy, Crowding –out and Crowding – in; Monetary policy and
+instruments, the Transmission Mechanism; Effectiveness of macroeconomic policies in open and
+closed economies)
+
+UNIT III: 
+(Classical and Keynesian Macroeconomics Thoughts
+Keynes verses classics: Classical macroeconomics, Employment and output determination, Say’s
+law, the quantity theory of money, Keynes’s General theory: Keynes’s main propositions;
+analysis of the labour market, Keynes’s critique of Say’s law and Quantity theory of money, the
+orthodox Keynesian school, underemployment equilibrium in the Keynesian model, the Phillips
+curve and orthodox Keynesian school)
+
+UNIT IV: 
+(Monetarist and New Classical Macroeconomic Thoughts
+The orthodox monetarist school, the Quantity Theory of Money approach, the expectations
+augmented Phillips curve analysis, the orthodox monetarist school and stabilization policy
+New Classical Economics: The influence of Robert e Lucas Jr, the structure of new classical
+models: the Rational Expectations hypothesis; and policy implications)`; const ECO_P10 = `UNIT I: 
+(Data Collection and Measures of Central Tendency and Dispersion
+Basic concepts: population and sample, parameter and statistic; Data Collection: primary and
+secondary data, methods of collection of primary data; Presentation of Data: frequency distribution;
+cumulative frequency; graphic and diagrammatic representation of data; Measures of Central
+Tendency: mean, median, mode, geometric mean, harmonic mean, their relative merits and
+demerits; Measures of Dispersion: absolute and relative - range, mean deviation, standard
+deviation, coefficient of variation, quartile deviation, their merits and demerits; Measures of
+skewness and kurtosis.)
+
+UNIT II: 
+(Correlation and Regression Analysis
+Correlation: scatter diagram, sample correlation coefficient - Karl Pearson’s correlation coefficient
+and its properties, probable error of correlation coefficient, Spearman’s rank correlation coefficient.
+Two variable linear regression analysis - estimation of regression lines (Least square method) and
+regression coefficients - their interpretation and properties, standard error of estimate)
+
+UNIT III: 
+(Time Series and Index Number
+Time Series: definition and components, measurement of trend- free hand method, methods of
+semi-average, moving average and method of least squares (equations of first and second degree
+only), measurement of seasonal component; Index Numbers: Concept, price relative, quantity
+relative and value relative; Laspeyer’s and Fisher’s index, family budget method, problems in
+construction and limitations of index numbers, test for ideal index number)
+
+UNIT IV: 
+(Probability Theory and Sampling
+Probability: Basic concepts, addition and multiplication rules, conditional probability; Meaning of
+Sampling, Types of Sampling: Probability Sampling verses Non-Probability Sampling; Simple
+Random Sampling and its selection, Systematic Sampling, Multi-stage Sampling, Quota Sampling;
+Error: Sampling and Non-sampling)`; const ECO_MINOR = `UNIT I: 
+(Update Soon)
+
+UNIT II: 
+(Update Soon)
+
+UNIT III: 
+(Update Soon)
+
+UNIT IV: 
+(Update Soon)`; const ECO_SEC = `UNIT I: 
+(Update Soon)
+
+UNIT II: 
+(Update Soon)
+
+UNIT III: 
+(Update Soon)
+
+UNIT IV: 
+(Update Soon)`;
+
+        // 2. EDUCATION
+        const EDU_P8 = UNIT_TEMPLATE; const EDU_P9 = UNIT_TEMPLATE; const EDU_P10 = UNIT_TEMPLATE; const EDU_MINOR = UNIT_TEMPLATE; const EDU_SEC = UNIT_TEMPLATE;
+
+        // 3. ENGLISH
+        const ENG_P8 = UNIT_TEMPLATE; const ENG_P9 = UNIT_TEMPLATE; const ENG_P10 = UNIT_TEMPLATE; const ENG_MINOR = UNIT_TEMPLATE; const ENG_SEC = UNIT_TEMPLATE;
+
+        // 4. GEOGRAPHY
+        const GEO_P8 = UNIT_TEMPLATE; const GEO_P9 = UNIT_TEMPLATE; const GEO_P10 = UNIT_TEMPLATE; const GEO_MINOR = UNIT_TEMPLATE; const GEO_SEC = UNIT_TEMPLATE;
+
+        // 5. HINDI
+        const HIN_P8 = UNIT_TEMPLATE; const HIN_P9 = UNIT_TEMPLATE; const HIN_P10 = UNIT_TEMPLATE; const HIN_MINOR = UNIT_TEMPLATE; const HIN_SEC = UNIT_TEMPLATE;
+
+        // 6. HISTORY
+        const HIS_P8 = `UNIT I: The English Revolution and European Politics in the 18th century:
+1. Background: Socio-Economic and Political Crisis in 17th Century Europe.
+2. Major Issues-Political and Intellectual Currents;
+3. Parliamentary Monarchy;
+4. Patterns of Absolutism in Europe
+UNIT II: Rise of Modern Science
+1. Development of Science from Renaissance to the 17th century
+2. Impact of Modern Science on European society
+UNIT III: Mercantilism and European Economy
+1. Origin and spread of Mercantilism
+2. Impact of Mercantilism on European economy
+3. Agricultural and Scientific Background to the Industrial Revolution
+UNIT IV: The American Revolution
+1. Political currents
+2. Socio-Economic Issues
+3. Significance of the American Revolution`;
+        const HIS_P9 = `UNIT I: 
+(Establishment of Mughal Rule:
+1. India on the eve of advent of the Mughals
+2. Military Technology: Fire Arms, gun powder
+3. Sher Shah: Administrative and Revenue Reforms)
+
+UNIT II: 
+(Consolidation of Mughal Rule:
+1. Incorporation of Rajputs and other Indigenous Groups in Mughal Nobility
+2. Evolution of Administrative Institutions: zabti, mansab, jagir,madad-i-maash
+3. Emergence of the Marathas; Shivaji; Expansion under the Peshwas)
+
+UNIT III: 
+(Society and Economy:
+1. Land rights and Revenue system: Zamindars and Peasants
+2. Trade Routes and patterns of Internal Commerce; overseas trade
+3. Urban Centres, Craft and Technology)
+
+UNIT IV: 
+(Cultural Ideals:
+1. Religious tolerance and sulh-i-kul; Sufi mystical and Intellectual Interventions
+2. Art and Architecture
+3. Mughal and Rajput Paintings: Themes and Perspectives)`; const HIS_P10 = `UNIT I: 
+(Meaning and Scope of History
+1. Definition, Nature and Scope of History.
+2. Object and Value of History.
+3. History, Science and Morality.)
+
+UNIT II: 
+(Traditions of Historical Writing
+1. Ancient Greek Traditions - Herodotus, Thucydides
+2. Ancient Roman Traditions - Polybius, Livy and Tacitus
+3. Medieval Understanding: Western - St. Augustine, Arabic - Ibn Khaldun.)
+
+UNIT III: 
+(History as Interdisciplinary Practice
+1. History and Archaeology, History and Anthropology.
+2. History and Psychology, History and Literature.
+3. History and Political Science, History and Sociology)
+
+UNIT IV: 
+(Historical Methods
+1. Sources of History: Written, Oral. Visual & Archaeological.
+2. Historical facts.
+3. Historical Causation.
+4. Historical Objectivity)`; const HIS_MINOR = HIS_P8; const HIS_SEC = UNIT_TEMPLATE;
+
+        // 7. ODIA
+        const ODI_P8 = UNIT_TEMPLATE; const ODI_P9 = UNIT_TEMPLATE; const ODI_P10 = UNIT_TEMPLATE; const ODI_MINOR = UNIT_TEMPLATE; const ODI_SEC = UNIT_TEMPLATE;
+
+        // 8. POLITICAL SCIENCE
+        const POL_P8 = `UNIT I: 
+(Major Contestations in Indian Politics
+a) Nation Building: Processes & Challenges
+b) Changing Nature of Indian State: Social Base of Power- Class, Caste, Ethnicity, &
+Gender; Welfare State & Neo-liberal State
+c) Social Justice and Affirmative Action Policies)
+
+UNIT II: 
+(Identity Politics - I
+a) Caste in Politics and Politicization of Caste, Dalits, and Backward Castes
+b) Tribe: Constitutional Provisions- Fifth & Sixth Schedules, Development and
+Displacement. Forest Rights Act& Challenges
+c) Gender: Participation and Representation of women in democratic institutions)
+
+UNIT III: 
+(Identity Politics - II
+a) Religion: Debates on Secularism and Communalism, Minority Rights
+b) Region and Regionalism: Autonomy and Statehood movements
+c) Language: Linguistic Diversity and Constitutional Provisions, Linguistic
+Reorganization of states)
+
+UNIT IV: 
+(Party System and Electoral Process
+a) Indian party system: National and State parties, Trends in party system. Politics of
+Defection, Coalition Politics
+b) Electoral Process in India: Electoral reforms. Trends in voting behaviour)`; const POL_P9 = `UNIT I: 
+(Idealism and Socialism
+a) Hegel: Dialectical Idealism; Concept of State; Theory of Freedom
+b) Karl Marx: Dialectical Materialism: Historical Materialism; Concept of Class;
+Capitalist exploitation, State; and Revolution)
+
+UNIT II: 
+(Critical Theories
+a) Gramsci: Power. Hegemony and Civil Society, Role of Intellectuals, Types of
+War
+b) Jurgen Habermas: Legitimation Crisis, Theory of Communicative Action)
+
+UNIT III: 
+(Feminist Thinkers
+a) Marry Wollstonecraft: Men's right and women's freedom, Idea of Women
+Education
+b) Carole Pateman: The Sexual Contract; Democracy, Participation and
+Obligation: Patriarchy. Contract and Property)
+
+UNIT IV: 
+(Contemporary Liberalism & Its Critics
+a) John Rawls: Justice as Fairness, Original Position. Veil of Ignorance
+b) Michel Foucault: Power and Freedom, Governmentality and Ethics)`; const POL_P10 = `UNIT I: 
+(Introduction to Public Administration
+a) Public Administration as a Discipline: Meaning, Nature & Scope, Evolution
+b) Politics-Administration Dichotomy, Public vs. Private Administration
+c) New Public Administration, New Public Management & Good Governance)
+
+UNIT II: 
+(Principles of Administration
+a) Organizations: Formal & Informal. Line and staff organizations
+b) Principles of Organization: Hierarchy. Span of Control, Unity of Command,
+Delegation. Decentralization. Coordination)
+
+UNIT III: 
+(Administrative Theories
+a) Administrative Management theory, Bureaucratic Theory
+b) Scientific Management Theory. Human Relations Theory)
+
+UNIT IV: 
+(Public Administration in India
+a) Bureaucracy: Structure& Processes; Recruitment, Training, Ethics in Administration
+b) Contemporary challenges & Perspectives: e-Governance. Public-Private Partnership.
+State vs Market Debate)`; const POL_MINOR = UNIT_TEMPLATE; const POL_SEC = UNIT_TEMPLATE;
+
+        // 9. SANSKRIT
+        const SAN_P8 = UNIT_TEMPLATE; const SAN_P9 = UNIT_TEMPLATE; const SAN_P10 = UNIT_TEMPLATE; const SAN_MINOR = UNIT_TEMPLATE; const SAN_SEC = UNIT_TEMPLATE;
+
+        // 10. SOCIOLOGY
+        const SOC_P8 = UNIT_TEMPLATE; const SOC_P9 = UNIT_TEMPLATE; const SOC_P10 = UNIT_TEMPLATE; const SOC_MINOR = UNIT_TEMPLATE; const SOC_SEC = UNIT_TEMPLATE;
+
+        // 11. STATISTICS
+        const STA_P8 = UNIT_TEMPLATE; const STA_P9 = UNIT_TEMPLATE; const STA_P10 = UNIT_TEMPLATE; const STA_MINOR = UNIT_TEMPLATE; const STA_SEC = UNIT_TEMPLATE;
+
+        /* --- LOGIC DATABASE --- */
+        const DB = {
+            "ECONOMICS": { P8: ECO_P8, P9: ECO_P9, P10: ECO_P10, MINOR: ECO_MINOR, SEC: ECO_SEC },
+            "EDUCATION": { P8: EDU_P8, P9: EDU_P9, P10: EDU_P10, MINOR: EDU_MINOR, SEC: EDU_SEC },
+            "ENGLISH": { P8: ENG_P8, P9: ENG_P9, P10: ENG_P10, MINOR: ENG_MINOR, SEC: ENG_SEC },
+            "GEOGRAPHY": { P8: GEO_P8, P9: GEO_P9, P10: GEO_P10, MINOR: GEO_MINOR, SEC: GEO_SEC },
+            "HINDI": { P8: HIN_P8, P9: HIN_P9, P10: HIN_P10, MINOR: HIN_MINOR, SEC: HIN_SEC },
+            "HISTORY": { P8: HIS_P8, P9: HIS_P9, P10: HIS_P10, MINOR: HIS_MINOR, SEC: HIS_SEC },
+            "ODIA": { P8: ODI_P8, P9: ODI_P9, P10: ODI_P10, MINOR: ODI_MINOR, SEC: ODI_SEC },
+            "POLITICAL SCIENCE": { P8: POL_P8, P9: POL_P9, P10: POL_P10, MINOR: POL_MINOR, SEC: POL_SEC },
+            "SANSKRIT": { P8: SAN_P8, P9: SAN_P9, P10: SAN_P10, MINOR: SAN_MINOR, SEC: SAN_SEC },
+            "SOCIOLOGY": { P8: SOC_P8, P9: SOC_P9, P10: SOC_P10, MINOR: SOC_MINOR, SEC: SOC_SEC },
+            "STATISTICS": { P8: STA_P8, P9: STA_P9, P10: STA_P10, MINOR: STA_MINOR, SEC: STA_SEC }
+        };
+
+        const subjects = Object.keys(DB).sort();
+        let currentSubject = "";
+
+        function handleNameInput() {
+            const inp = document.getElementById('nameInp');
+            if (inp.value.endsWith(' ')) {
+                showPage('p2');
+                document.getElementById('userTag').innerText = "Student: " + inp.value.trim();
+                renderLists();
+            }
+        }
+
+        function renderLists() {
+            const mList = document.getElementById('mainSubjectList'); mList.innerHTML = "";
+            subjects.forEach(s => {
+                const b = document.createElement('button'); b.className = "btn"; b.innerText = s;
+                b.onclick = () => { currentSubject = s; showPage('p3'); document.getElementById('selectedSubjectTag').innerText = s; };
+                mList.appendChild(b);
+            });
+            const sList = document.getElementById('secSubjectList'); sList.innerHTML = "";
+            subjects.forEach(s => {
+                const b = document.createElement('button'); b.className = "btn"; b.innerText = s;
+                b.onclick = () => { currentSubject = s; loadManualSyllabus('SEC'); };
+                sList.appendChild(b);
+            });
+        }
+
+        function openSEC() { showPage('p5'); }
+
+        function loadManualSyllabus(type) {
+            let content = DB[currentSubject][type];
+            document.getElementById('syllabusTitle').innerText = currentSubject + " - " + type.replace('P', 'Paper ');
+            document.getElementById('syllabusBody').innerHTML = content.replace(/(UNIT I:|UNIT II:|UNIT III:|UNIT IV:|UNIT-I:|UNIT-II:|UNIT-III:|UNIT-IV:)/gi, '<span class="highlight-unit">$1</span>');
+            const bBtn = document.getElementById('syllabusBackBtn');
+            if (type === 'MINOR') bBtn.onclick = () => showPage('p3');
+            else if (type === 'SEC') bBtn.onclick = () => showPage('p5');
+            else bBtn.onclick = () => showPage('p4');
+            showPage('p6');
+        }
+
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+        function goBack(id) { showPage(id); }
+    </script>
+</body>
+</html>
