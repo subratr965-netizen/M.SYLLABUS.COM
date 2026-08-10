@@ -292,7 +292,98 @@
     color: #64748b;
     font-style: italic;
 }
-    </style>
+
+
+
+
+
+
+
+
+
+/* --- ULTRA SMOOTH & UNIQUE ANIMATION SYSTEM --- */
+
+/* 1. Spring-based Elastic Entrance Keyframes */
+@keyframes elasticEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(45px) scale(0.88) rotateX(-10deg);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-6px) scale(1.02) rotateX(0deg);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+        filter: blur(0px);
+    }
+}
+
+/* 2. Light Sweep (Glow) Effect on Entrance */
+@keyframes glowSweep {
+    0% { left: -100%; opacity: 0.6; }
+    100% { left: 200%; opacity: 0; }
+}
+
+/* Apply Ultra-Smooth Transition to Paper Cards */
+.paper-card {
+    animation: elasticEntrance 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    opacity: 0;
+    will-change: transform, opacity, filter;
+    transform-origin: center bottom;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle Glow Line Moving Across Cards */
+.paper-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: glowSweep 1.2s ease-in-out forwards;
+}
+
+/* Staggered Delay for Each Card (One-by-One Cascade) */
+.cards-grid .paper-card:nth-child(1) { animation-delay: 0.08s !important; }
+.cards-grid .paper-card:nth-child(1)::after { animation-delay: 0.4s !important; }
+
+.cards-grid .paper-card:nth-child(2) { animation-delay: 0.16s !important; }
+.cards-grid .paper-card:nth-child(2)::after { animation-delay: 0.48s !important; }
+
+.cards-grid .paper-card:nth-child(3) { animation-delay: 0.24s !important; }
+.cards-grid .paper-card:nth-child(3)::after { animation-delay: 0.56s !important; }
+
+.cards-grid .paper-card:nth-child(4) { animation-delay: 0.32s !important; }
+.cards-grid .paper-card:nth-child(4)::after { animation-delay: 0.64s !important; }
+
+.cards-grid .paper-card:nth-child(5) { animation-delay: 0.40s !important; }
+.cards-grid .paper-card:nth-child(5)::after { animation-delay: 0.72s !important; }
+
+.cards-grid .paper-card:nth-child(6) { animation-delay: 0.48s !important; }
+.cards-grid .paper-card:nth-child(6)::after { animation-delay: 0.80s !important; }
+
+/* Timetable Blue Button Entrance */
+.btn-timetable {
+    animation: elasticEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    animation-delay: 0.02s !important;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Touch Feedback Animation for Mobile */
+.paper-card:active, .btn-timetable:active {
+    transform: scale(0.94) translateY(2px) !important;
+    transition: transform 0.12s ease-out !important;
+}    </style>
 </head>
 <body>
 
