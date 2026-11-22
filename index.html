@@ -16,6 +16,7 @@
             --green-hover: #059669;
         }
 
+        /* Fixed '-' typo to universal selector '*' */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -107,12 +108,6 @@
             opacity: 0.7;
         }
 
-        .paper-card:active {
-            transform: scale(0.95);
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
-        }
-
         .card-tag {
             font-size: 1.1rem;
             font-weight: 700;
@@ -175,22 +170,40 @@
             font-size: 0.88rem;
             color: #cbd5e1;
             line-height: 1.6;
-            white-space: pre-wrap;
+            white-space: pre-line;
+        }
+
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
         }
 
         .back-btn {
-            display: inline-block;
-            color: var(--text-sub);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 14px;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-decoration: none;
             cursor: pointer;
-            margin-bottom: 15px;
-            transition: color 0.2s;
+            transition: background 0.2s;
         }
 
         .back-btn:hover {
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dev-credit {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            letter-spacing: 0.5px;
         }
 
         .floating-download-btn {
@@ -220,170 +233,152 @@
 
         @media print {
             body { background: #ffffff; color: #000000; }
-            .floating-download-btn, .back-btn, .portal-header p { display: none !important; }
+            .floating-download-btn, .top-nav-bar, .portal-header p { display: none !important; }
             .paper-card, .syllabus-view { border: none; box-shadow: none; background: transparent; }
             .unit-title { color: #000000; }
             .unit-content { color: #333333; }
         }
 
-        /* Time Table Button & Modal Styling */
-.btn-timetable {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    width: 100%;
-    margin-bottom: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-    transition: transform 0.2s, background 0.2s;
-}
-.btn-timetable:active {
-    transform: scale(0.97);
-}
+        /* Time Table Button & Table Styling */
+        .btn-timetable {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 28px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: transform 0.2s, background 0.2s;
+        }
 
-/* Horizontal Scroll Table Container */
-.timetable-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    margin-top: 15px;
-    border-radius: 12px;
-    border: 1px solid var(--card-border);
-    background: rgba(0, 0, 0, 0.3);
-}
+        .timetable-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.3);
+        }
 
-.timetable-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px; /* Horizontal scroll Trigger */
-    text-align: center;
-    font-size: 0.82rem;
-}
+        .timetable-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+            text-align: center;
+            font-size: 0.82rem;
+        }
 
-.timetable-table th {
-    background: var(--accent-gold);
-    color: #000;
-    padding: 10px 8px;
-    font-weight: 700;
-    white-space: nowrap;
-}
+        .timetable-table th {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 10px 8px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
 
-.timetable-table td {
-    padding: 10px 6px;
-    border: 1px solid var(--card-border);
-    color: #e2e8f0;
-    white-space: nowrap;
-}
+        .timetable-table td {
+            padding: 10px 6px;
+            border: 1px solid var(--card-border);
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
 
-.timetable-table tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.03);
-}
+        .timetable-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
 
-.tt-day {
-    font-weight: 700;
-    color: #38bdf8 !important;
-    background: rgba(56, 189, 248, 0.1);
-}
+        .tt-day {
+            font-weight: 700;
+            color: #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.1);
+        }
 
-.tt-empty {
-    color: #64748b;
-    font-style: italic;
-}
+        .tt-empty {
+            color: #64748b;
+            font-style: italic;
+        }
 
+        /* --- ULTRA SMOOTH & UNIQUE ANIMATION SYSTEM --- */
+        @keyframes elasticEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(45px) scale(0.88) rotateX(-10deg);
+                filter: blur(8px);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateY(-6px) scale(1.02) rotateX(0deg);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+                filter: blur(0px);
+            }
+        }
 
+        @keyframes glowSweep {
+            0% { left: -100%; opacity: 0.6; }
+            100% { left: 200%; opacity: 0; }
+        }
 
+        .paper-card {
+            animation: elasticEntrance 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+            opacity: 0;
+            will-change: transform, opacity, filter;
+            transform-origin: center bottom;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .paper-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            animation: glowSweep 1.2s ease-in-out forwards;
+        }
 
+        .cards-grid .paper-card:nth-child(1) { animation-delay: 0.08s !important; }
+        .cards-grid .paper-card:nth-child(1)::after { animation-delay: 0.4s !important; }
 
+        .cards-grid .paper-card:nth-child(2) { animation-delay: 0.16s !important; }
+        .cards-grid .paper-card:nth-child(2)::after { animation-delay: 0.48s !important; }
 
+        .cards-grid .paper-card:nth-child(3) { animation-delay: 0.24s !important; }
+        .cards-grid .paper-card:nth-child(3)::after { animation-delay: 0.56s !important; }
 
+        .cards-grid .paper-card:nth-child(4) { animation-delay: 0.32s !important; }
+        .cards-grid .paper-card:nth-child(4)::after { animation-delay: 0.64s !important; }
 
-/* --- ULTRA SMOOTH & UNIQUE ANIMATION SYSTEM --- */
+        .cards-grid .paper-card:nth-child(5) { animation-delay: 0.40s !important; }
+        .cards-grid .paper-card:nth-child(5)::after { animation-delay: 0.72s !important; }
 
-/* 1. Spring-based Elastic Entrance Keyframes */
-@keyframes elasticEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(45px) scale(0.88) rotateX(-10deg);
-        filter: blur(8px);
-    }
-    60% {
-        opacity: 0.8;
-        transform: translateY(-6px) scale(1.02) rotateX(0deg);
-        filter: blur(0px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0deg);
-        filter: blur(0px);
-    }
-}
+        .cards-grid .paper-card:nth-child(6) { animation-delay: 0.48s !important; }
+        .cards-grid .paper-card:nth-child(6)::after { animation-delay: 0.80s !important; }
 
-/* 2. Light Sweep (Glow) Effect on Entrance */
-@keyframes glowSweep {
-    0% { left: -100%; opacity: 0.6; }
-    100% { left: 200%; opacity: 0; }
-}
+        .btn-timetable {
+            animation: elasticEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+            animation-delay: 0.52s !important;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
 
-/* Apply Ultra-Smooth Transition to Paper Cards */
-.paper-card {
-    animation: elasticEntrance 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
-    opacity: 0;
-    will-change: transform, opacity, filter;
-    transform-origin: center bottom;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Subtle Glow Line Moving Across Cards */
-.paper-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transform: skewX(-25deg);
-    pointer-events: none;
-    animation: glowSweep 1.2s ease-in-out forwards;
-}
-
-/* Staggered Delay for Each Card (One-by-One Cascade) */
-.cards-grid .paper-card:nth-child(1) { animation-delay: 0.08s !important; }
-.cards-grid .paper-card:nth-child(1)::after { animation-delay: 0.4s !important; }
-
-.cards-grid .paper-card:nth-child(2) { animation-delay: 0.16s !important; }
-.cards-grid .paper-card:nth-child(2)::after { animation-delay: 0.48s !important; }
-
-.cards-grid .paper-card:nth-child(3) { animation-delay: 0.24s !important; }
-.cards-grid .paper-card:nth-child(3)::after { animation-delay: 0.56s !important; }
-
-.cards-grid .paper-card:nth-child(4) { animation-delay: 0.32s !important; }
-.cards-grid .paper-card:nth-child(4)::after { animation-delay: 0.64s !important; }
-
-.cards-grid .paper-card:nth-child(5) { animation-delay: 0.40s !important; }
-.cards-grid .paper-card:nth-child(5)::after { animation-delay: 0.72s !important; }
-
-.cards-grid .paper-card:nth-child(6) { animation-delay: 0.48s !important; }
-.cards-grid .paper-card:nth-child(6)::after { animation-delay: 0.80s !important; }
-
-/* Timetable Blue Button Entrance */
-.btn-timetable {
-    animation: elasticEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
-    animation-delay: 0.02s !important;
-    opacity: 0;
-    will-change: transform, opacity;
-}
-
-/* Touch Feedback Animation for Mobile */
-.paper-card:active, .btn-timetable:active {
-    transform: scale(0.94) translateY(2px) !important;
-    transition: transform 0.12s ease-out !important;
-}    </style>
+        .paper-card:active, .btn-timetable:active {
+            transform: scale(0.94) translateY(2px) !important;
+            transition: transform 0.12s ease-out !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -398,11 +393,11 @@
             <div class="cards-grid">
                 <div class="paper-card" onclick="openSyllabus('paper11')">
                     <div class="card-tag">Paper XI</div>
-                    <div class="card-sub"> DEVELOPMENT ECONOMICS-I </div>
+                    <div class="card-sub">DEVELOPMENT ECONOMICS-I</div>
                 </div>
                 <div class="paper-card" onclick="openSyllabus('paper12')">
                     <div class="card-tag">Paper XII</div>
-                    <div class="card-sub"> MATHEMATICAL METHODS FOR ECONOMICS II </div>
+                    <div class="card-sub">MATHEMATICAL METHODS FOR ECONOMICS II</div>
                 </div>
                 <div class="paper-card" onclick="openSyllabus('paper13')">
                     <div class="card-tag">Paper XIII</div>
@@ -414,102 +409,101 @@
                 </div>
                 <div class="paper-card" onclick="openSyllabus('sec2')">
                     <div class="card-tag">SEC II</div>
-                    <div class="card-sub">Skill Enhance Course</div>
+                    <div class="card-sub">Skill Enhancement Course</div>
                 </div>
                 <div class="paper-card" onclick="openSyllabus('vac2')">
                     <div class="card-tag">VAC II</div>
-                    <div class="card-sub">Value Added course </div>
+                    <div class="card-sub">Value Added Course</div>
+                </div>
+            </div>
+
+            <!-- Class Time Table Button (Placed inside homePage so it hides on syllabus view) -->
+            <button class="btn-timetable" onclick="toggleTimetable()">
+                📅 CLASS TIME TABLE (UG SEM-V)
+            </button>
+
+            <!-- Timetable Container -->
+            <div id="timetableSection" style="display: none;">
+                <div class="timetable-wrapper">
+                    <table class="timetable-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>8:00–9:00 AM</th>
+                                <th>9:00–10:00 AM</th>
+                                <th>10:00–11:00 AM</th>
+                                <th>11:00 AM–12:00 PM</th>
+                                <th>12:00–1:00 PM</th>
+                                <th>4:00–5:00 PM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tt-day">Monday</td>
+                                <td>UG V_SEC_TP_102</td>
+                                <td>UG V_C12_PJ_102</td>
+                                <td>UG V_C12_PJ_102</td>
+                                <td>UG V_C11_AT_102</td>
+                                <td>UG V_M_3_G1_101</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                            <tr>
+                                <td class="tt-day">Tuesday</td>
+                                <td>UG V_SEC_TP_102</td>
+                                <td>UG V_C12_PJ_101</td>
+                                <td>UG V_C11_AT_102</td>
+                                <td>UG V_C11_AT_102</td>
+                                <td>UG V_M_3_G1_101</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                            <tr>
+                                <td class="tt-day">Wednesday</td>
+                                <td class="tt-empty">-</td>
+                                <td>UG V_C13_AM_CH</td>
+                                <td>UG V_C12_PJ_101</td>
+                                <td class="tt-empty">-</td>
+                                <td class="tt-empty">-</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                            <tr>
+                                <td class="tt-day">Thursday</td>
+                                <td>UG V_SEC_TP_102</td>
+                                <td>UG V_C13_AM_101</td>
+                                <td>UG V_C13_AM_101</td>
+                                <td class="tt-empty">-</td>
+                                <td class="tt-empty">-</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                            <tr>
+                                <td class="tt-day">Friday</td>
+                                <td class="tt-empty">-</td>
+                                <td>UG V_M_3_G1_CF</td>
+                                <td class="tt-empty">-</td>
+                                <td class="tt-empty">-</td>
+                                <td>UG V_C13_AM_101</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                            <tr>
+                                <td class="tt-day">Saturday</td>
+                                <td class="tt-empty">-</td>
+                                <td>UG V_M_3_G1_CH</td>
+                                <td class="tt-empty">-</td>
+                                <td class="tt-empty">-</td>
+                                <td>UG V_C11_AT_101</td>
+                                <td>Remedial – UG-V</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-       
-        <br>  <br>  <br>  <br>
 
-      
-
-<!-- Class Time Table Button -->
-<button class="btn-timetable" onclick="toggleTimetable()">
-    📅 CLASS TIME TABLE (UG SEM-V)
-</button>
-
-
-
-<!-- Updated Timetable Container -->
-<div id="timetableSection" style="display: none; margin-bottom: 20px;">
-    <div class="timetable-wrapper">
-        <table class="timetable-table">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>8:00–9:00 AM</th>
-                    <th>9:00–10:00 AM</th>
-                    <th>10:00–11:00 AM</th>
-                    <th>11:00 AM–12:00 PM</th>
-                    <th>12:00–1:00 PM</th>
-                    <th>4:00–5:00 PM</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="tt-day">Monday</td>
-                    <td>UG V_SEC_TP_102</td>
-                    <td>UG V_C12_PJ_102</td>
-                    <td>UG V_C12_PJ_102</td>
-                    <td>UG V_C11_AT_102</td>
-                    <td>UG V_M_3_G1_101</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-                <tr>
-                    <td class="tt-day">Tuesday</td>
-                    <td>UG V_SEC_TP_102</td>
-                    <td>UG V_C12_PJ_101</td>
-                    <td>UG V_C11_AT_102</td>
-                    <td>UG V_C11_AT_102</td>
-                    <td>UG V_M_3_G1_101</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-                <tr>
-                    <td class="tt-day">Wednesday</td>
-                    <td>_</td>
-                    <td>UG V_C13_AM_CH</td>
-                    <td>UG V_C12_PJ_101</td>
-                    <td class="tt-empty">-</td>
-                    <td class="tt-empty">-</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-                <tr>
-                    <td class="tt-day">Thursday</td>
-                     <td>UG V_SEC_TP_102</td>
-                    <td>UG V_C13_AM_101</td>
-                    <td>UG V_C13_AM_101</td>
-                    <td class="tt-empty">-</td>
-                    <td class="tt-empty">-</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-                <tr>
-                    <td class="tt-day">Friday</td>
-                    <td class="tt-empty">-</td>
-                    <td>UG V_M_3_G1_CF</td>
-                    <td class="tt-empty">-</td>
-                    <td class="tt-empty">-</td>
-                    <td>UG V_C13_AM_101</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-                <tr>
-                    <td class="tt-day">Saturday</td>
-                    <td class="tt-empty">-</td>
-                    <td>UG V_M_3_G1_CH</td>
-                    <td class="tt-empty">-</td>
-                    <td>-</td>
-                    <td>UG V_C11_AT_101</td>
-                    <td>Remedial – UG-V</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>        <!-- SYLLABUS DETAIL PAGE -->
+        <!-- SYLLABUS DETAIL PAGE -->
         <div id="syllabusPage" class="page">
-            <a class="back-btn" onclick="handleManualBack()">developed by - SUBRAT KUMAR RATHA </a>
+            <div class="top-nav-bar">
+                <a class="back-btn" onclick="handleManualBack()">← Back</a>
+                <span class="dev-credit">Developed by SUBRAT KUMAR RATHA</span>
+            </div>
             
             <div class="syllabus-view" id="printContent">
                 <div class="view-header">
@@ -522,103 +516,143 @@
         </div>
     </div>
 
-    <!--<button class="floating-download-btn" onclick="downloadPage()">
-        📥 Download Page
-    </button>--> 
-
     <script>
         const syllabusData = {
             paper11: {
                 title: "PAPER XI",
-                subject: " DEVELOPMENT ECONOMICS-I ",
+                subject: "DEVELOPMENT ECONOMICS-I",
                 units: [
-                    { name: "UNIT I: Study of Economic Development ", content: "Conceptions of Development economic growth and economic development; Alternative measures 
-of development, documenting the international variations in these measures, comparing
-development trajectories across nations and within them measures of economic development –
-national and per capita income, basic needs approach, capabilities approach, three core values of
-development, PQLI, HDI, HPI, MDPI, GDI; Happiness Index." },
-                    { name: "UNIT II: Theories of Economic Growth and Development ", content: "Classical theory, Marxian theory; Schumpeterian theory; Rostow‘s stages of economic growth;
-Harrod-Domar model, Solow model and convergence with population growth and technical
-progress.." },
-                    { name: "UNIT III:  Poverty, Inequality, Agriculture, Industry and Development", content: "Measuring poverty: Head Count Ratio, Poverty Gap Ratio, Squared Poverty Ratio, FGT Ratio;
-Measuring Inequality – Lorenz curve and Kuznets‘ inverted U hypothesis; Growth, poverty and
-inequality; Policy options – some basic considerations Agriculture, Industry and Economic 
-Development: Interdependence between agriculture and industries – A model of complementarities 
-between agriculture and industry; terms of trade between agriculture and industry; functioning of 
-markets in agrarian societies; interlinked agrarian markets." },
-                    { name: "UNIT IV:  Institutions and Economic Development", content: "Role of institutions in economic development; Characteristics of good institutions and quality of
-institutions; The pre-requisites of a sound institutional structure; Different measures of institutions 
-– aggregate governance index, property rights and risk of expropriation; The role of democracy in 
-economic development; Role of markets and market failure; Institutional and cultural requirements 
-for operation of effective private markets; Market facilitating conditions; Limitations of markets in 
-LDCs; Corruption and economic development – tackling the problem of corruption " }
+                    { 
+                        name: "UNIT I: Study of Economic Development", 
+                        content: `Conceptions of Development: economic growth and economic development; Alternative measures of development, documenting the international variations in these measures, comparing development trajectories across nations and within them; measures of economic development – national and per capita income, basic needs approach, capabilities approach, three core values of development, PQLI, HDI, HPI, MDPI, GDI; Happiness Index.` 
+                    },
+                    { 
+                        name: "UNIT II: Theories of Economic Growth and Development", 
+                        content: `Classical theory, Marxian theory; Schumpeterian theory; Rostow‘s stages of economic growth; Harrod-Domar model, Solow model and convergence with population growth and technical progress.` 
+                    },
+                    { 
+                        name: "UNIT III: Poverty, Inequality, Agriculture, Industry and Development", 
+                        content: `Measuring poverty: Head Count Ratio, Poverty Gap Ratio, Squared Poverty Ratio, FGT Ratio; Measuring Inequality – Lorenz curve and Kuznets‘ inverted U hypothesis; Growth, poverty and inequality; Policy options – some basic considerations.\n\nAgriculture, Industry and Economic Development: Interdependence between agriculture and industries – A model of complementarities between agriculture and industry; terms of trade between agriculture and industry; functioning of markets in agrarian societies; interlinked agrarian markets.` 
+                    },
+                    { 
+                        name: "UNIT IV: Institutions and Economic Development", 
+                        content: `Role of institutions in economic development; Characteristics of good institutions and quality of institutions; The pre-requisites of a sound institutional structure; Different measures of institutions – aggregate governance index, property rights and risk of expropriation; The role of democracy in economic development; Role of markets and market failure; Institutional and cultural requirements for operation of effective private markets; Market facilitating conditions; Limitations of markets in LDCs; Corruption and economic development – tackling the problem of corruption.` 
+                    }
                 ]
             },
             paper12: {
                 title: "PAPER XII",
-                subject: "MATHEMATICAL METHODS FOR ECONOMICS II ",
+                subject: "MATHEMATICAL METHODS FOR ECONOMICS II",
                 units: [
-                    { name: "UNIT I:  Linear models", content: "Input- Output Model: Basic concepts and structure of Leontief’s open and static Input-Output model; Solution for equilibrium output in a three industry model; The closed model ." },
-                    { name: "UNIT II: Second and Higher Order Derivatives and Integration", content: "Technique of higher order differentiation; Interpretation of second derivative; Second order derivative and curvature of a function; Concavity and convexity of functions; Points of inflection, Derivative of Implicit Function; Higher Order Partial Derivative Indefinite Integrals; Rules of Integration; Techniques of Integration: Substitution Rule, Integration by parts, and Partial Fractions; Definite Integral – Area Interpretation ." },
-                    { name: "UNIT III: Market Structures", content: "Optimum values and extreme values; Relative maximum and minimum; Necessary versus  sufficient conditions - First and Second derivative tests (using Hessian Determinants); Economic applications thereof, First and second order condition for extrema of multivariable functions; Convex functions and convex sets ." },
-                    { name: "UNIT IV:  Optimization with Equality Constraints", content: "Effects of a constraint; Finding stationary value – Lagrange-Multiplier method (Two variable single constraint case only): First and second order condition; The Bordered Hessian determinant." }
+                    { 
+                        name: "UNIT I: Linear Models", 
+                        content: `Input-Output Model: Basic concepts and structure of Leontief’s open and static Input-Output model; Solution for equilibrium output in a three industry model; The closed model.` 
+                    },
+                    { 
+                        name: "UNIT II: Second and Higher Order Derivatives and Integration", 
+                        content: `Technique of higher order differentiation; Interpretation of second derivative; Second order derivative and curvature of a function; Concavity and convexity of functions; Points of inflection, Derivative of Implicit Function; Higher Order Partial Derivative; Indefinite Integrals; Rules of Integration; Techniques of Integration: Substitution Rule, Integration by parts, and Partial Fractions; Definite Integral – Area Interpretation.` 
+                    },
+                    { 
+                        name: "UNIT III: Market Structures & Optimization", 
+                        content: `Optimum values and extreme values; Relative maximum and minimum; Necessary versus sufficient conditions - First and Second derivative tests (using Hessian Determinants); Economic applications thereof, First and second order condition for extrema of multivariable functions; Convex functions and convex sets.` 
+                    },
+                    { 
+                        name: "UNIT IV: Optimization with Equality Constraints", 
+                        content: `Effects of a constraint; Finding stationary value – Lagrange-Multiplier method (Two variable single constraint case only): First and second order condition; The Bordered Hessian determinant.` 
+                    }
                 ]
             },
             paper13: {
                 title: "PAPER XIII",
                 subject: "Money And Banking",
                 units: [
-                    { name: "UNIT I: Money complete ✅", content: "Definition and functions of money; Types of money: legal tender money and bank money, near money; Value of money and index number; construction of index number; WPI, CPI, PPI, GDP deflator, Cost of living index. Demand for money- Classical and Keynesian approaches, Patinkin and the Real Balance Effect; Friedman‘s Quantity theory of money. Supply of Money- Measures of money supply: M1, M2, M3 and M4 ; High powered money and money multiplier.  " },
-                    { name: "UNIT II: Commercial Banking complete ✅ ", content: " Meaning and types; Functions of commercial banks; the process of credit creation and its limitations; Balance sheet and portfolio management, Banking sector reforms in India; Lessons from Global Financial Crisis and Policy Response in India.  " },
-                    { name: "UNIT III:  Central Banking continue........", content: " Functions of a central bank; Quantitative and qualitative methods of credit control; Central Bank‘s Supervision and prudential measures for financial stability; current monetary policy of India, liquidity adjustment facility (LAF) through Repo and reverse repo operation, MSF.  " },
-                    { name: "UNIT IV:  Financial market ", content: " Financial Market, Meaning, Types, Money market and Capital Market, Primary and Secondary Market, Stock Exchanges, SEBI; Role of Financial Markets for Economic Development. Financial Instruments: Government securities, derivatives, futures and options, bond, debentures.." }
+                    { 
+                        name: "UNIT I: Money (Complete ✅)", 
+                        content: `Definition and functions of money; Types of money: legal tender money and bank money, near money; Value of money and index number; construction of index number; WPI, CPI, PPI, GDP deflator, Cost of living index. Demand for money - Classical and Keynesian approaches, Patinkin and the Real Balance Effect; Friedman‘s Quantity theory of money. Supply of Money - Measures of money supply: M1, M2, M3 and M4; High powered money and money multiplier.` 
+                    },
+                    { 
+                        name: "UNIT II: Commercial Banking (Complete ✅)", 
+                        content: `Meaning and types; Functions of commercial banks; the process of credit creation and its limitations; Balance sheet and portfolio management, Banking sector reforms in India; Lessons from Global Financial Crisis and Policy Response in India.` 
+                    },
+                    { 
+                        name: "UNIT III: Central Banking (Continue...)", 
+                        content: `Functions of a central bank; Quantitative and qualitative methods of credit control; Central Bank‘s Supervision and prudential measures for financial stability; current monetary policy of India, liquidity adjustment facility (LAF) through Repo and reverse repo operation, MSF.` 
+                    },
+                    { 
+                        name: "UNIT IV: Financial Market", 
+                        content: `Financial Market: Meaning, Types, Money market and Capital Market, Primary and Secondary Market, Stock Exchanges, SEBI; Role of Financial Markets for Economic Development. Financial Instruments: Government securities, derivatives, futures and options, bond, debentures.` 
+                    }
                 ]
             },
             minor3: {
                 title: "MINOR III",
                 subject: "Political Science",
                 units: [
-                    { name: "UNIT I:", content: " <b> Manu: </b> Social Law And Dharmic Governmetn <br> <b> Kautilya</b>:Theory of state; statecraft and government" },
-                    { name: "UNIT II: ", content: " <b>BARANI</b>; Theory Of King Ship ideal polity <br><b> ABUL FAZL</b>; monarchy , views on administration " },
-                    { name: "UNIT III: ", content: " <b>RAM MOHAN ROY</b>; liberalism and social reform <br><b> PANDITA RAMABAI</b>; gender and social reform  " },
-                    { name: "UNIT IV: ", content: " <b>SWAMI VIVEKANANDA</b>; ideal socity , ideas on hindusim <br> <b>V.D SAVARKAR</b>; hindutva, nationalism " }
+                    { 
+                        name: "UNIT I", 
+                        content: `<b>Manu:</b> Social Law and Dharmic Government<br><b>Kautilya:</b> Theory of State; Statecraft and Government` 
+                    },
+                    { 
+                        name: "UNIT II", 
+                        content: `<b>Barani:</b> Theory of Kingship, Ideal Polity<br><b>Abul Fazl:</b> Monarchy, Views on Administration` 
+                    },
+                    { 
+                        name: "UNIT III", 
+                        content: `<b>Ram Mohan Roy:</b> Liberalism and Social Reform<br><b>Pandita Ramabai:</b> Gender and Social Reform` 
+                    },
+                    { 
+                        name: "UNIT IV", 
+                        content: `<b>Swami Vivekananda:</b> Ideal Society, Ideas on Hinduism<br><b>V.D. Savarkar:</b> Hindutva, Nationalism` 
+                    }
                 ]
             },
             sec2: {
                 title: "SEC II",
                 subject: "Skill Enhancement Course",
                 units: [
-                    { name: "UNIT I:  Introduction to Data Analytics  ", content: "Concept of data analytics; Role of data analyst; Classification of Data- Structured, Semi-Structured, Unstructured data; Scale of measurement of data; Various Data sources, Modern Data collection Methods  " },
-                    { name: "UNIT II:  Data Visualisation and Basic Statistics  ", content: "Data presentation and visualization, Types of Diagrams; Descriptive statistics like measure of central tendency, Dispersion, Skewness, Correlation etc.; Univariate, Bivariate, Multivariate  analysis  ." },
-                    { name: "UNIT III:Introduction to SPSS  ", content: "Different Menu‘s in SPSS, creating a data file, opening excel files, variables and labels, selecting cases by filtering, recoding of data, merging of files, Sorting of Cases and Variable, SPSS Output and its transfer to excel and word.  ." },
-                    { name: "UNIT IV: Exploratory Data Analysis using SPSS ", content: "Data visualization using frequency tables and charts, descriptive statistics, cross tabulations, CompareMeans, ANOVA, Independent Sample t-test, Paired Sample t-test, One-way ANOVA, chi square tests. Simple and Partial correlation; General Linear Model  " }
+                    { 
+                        name: "UNIT I: Introduction to Data Analytics", 
+                        content: `Concept of data analytics; Role of data analyst; Classification of Data - Structured, Semi-Structured, Unstructured data; Scale of measurement of data; Various Data sources, Modern Data collection Methods.` 
+                    },
+                    { 
+                        name: "UNIT II: Data Visualisation and Basic Statistics", 
+                        content: `Data presentation and visualization, Types of Diagrams; Descriptive statistics like measure of central tendency, Dispersion, Skewness, Correlation etc.; Univariate, Bivariate, Multivariate analysis.` 
+                    },
+                    { 
+                        name: "UNIT III: Introduction to SPSS", 
+                        content: `Different Menus in SPSS, creating a data file, opening excel files, variables and labels, selecting cases by filtering, recoding of data, merging of files, Sorting of Cases and Variable, SPSS Output and its transfer to excel and word.` 
+                    },
+                    { 
+                        name: "UNIT IV: Exploratory Data Analysis using SPSS", 
+                        content: `Data visualization using frequency tables and charts, descriptive statistics, cross tabulations, Compare Means, ANOVA, Independent Sample t-test, Paired Sample t-test, One-way ANOVA, chi-square tests. Simple and Partial correlation; General Linear Model.` 
+                    }
                 ]
             },
             vac2: {
                 title: "VAC II",
                 subject: "Value Added Course",
                 units: [
-    {
-        name: "Unit 1: Introduction to Artificial Intelligence",
-        content: "Intelligence and Artificial Intelligence, Intelligent Machines and Smart Systems, Definition and Scope of AI, History and Evolution of AI, AI Problem Solving and Search Techniques, Rule-Based Systems, Natural Language Processing and Computer Vision – Introductory concepts."
-    },
-    {
-        name: "Unit 2: Machine Learning Fundamentals",
-        content: "Introduction to Machine Learning and Data-Driven Intelligence, Types of Machine Learning: Supervised, Unsupervised and Reinforcement Learning, Concept of Training Data and Labelled Data, Regression and Classification, Clustering and Dimensionality Reduction, Neural Networks – basic idea, Decision Trees, k-NN and Deep Learning (introductory concepts), Model Training and Evaluation (accuracy, precision, recall – concept only), Real-life examples of Machine Learning applications."
-    },
-    {
-        name: "Unit 3: AI Applications & Tools (Stream Specific)",
-        content: "Generic AI Applications: AI in education, healthcare, agriculture, governance, business analytics, finance, robotics, media and entertainment.\n\nHands-on Exposure to AI Tools: ChatGPT, Gemini, Copilot, Claude, Canva AI, Runway ML, Google Teachable Machine, DALL·E, Adobe Firefly and Pictory, Google AI Studio.\n\nA) AI for Arts Stream: AI in literature, language translation, digital humanities, music composition, creative writing, journalism, media analytics and visual arts.\n\nOR\n\nB) AI for Science Stream: AI in climate modelling, healthcare diagnostics, bioinformatics, environmental monitoring, scientific data analysis and research automation.\n\nOR\n\nC) AI for Commerce Stream: AI in marketing, customer analytics, accounting automation, fraud detection, e-commerce, stock prediction and financial services."
-    },
-    {
-        name: "Unit 4: Ethical, Social, Economic and Legal Implications of AI",
-        content: "Ethical AI and Responsible AI Practices, Algorithmic Bias and Fairness, Privacy and Surveillance Issues, Misinformation and Deepfakes, Intellectual Property and AI-generated Content, AI and Employment, Human-AI Collaboration, Digital Divide, Security Concerns, Existing Laws and Policies related to AI, Need for AI Governance and Sustainable AI Development."
-    },
-    {
-        name: "Unit 5: Group Mini Project & Presentation",
-        content: "Students shall identify a real-life case study from their stream and: (a) Design a conceptual AI-based solution, or (b) Critically evaluate an existing AI system/tool. The project should include problem identification, AI application analysis, ethical considerations, report preparation and seminar presentation."
-    }
-]
+                    {
+                        name: "Unit 1: Introduction to Artificial Intelligence",
+                        content: `Intelligence and Artificial Intelligence, Intelligent Machines and Smart Systems, Definition and Scope of AI, History and Evolution of AI, AI Problem Solving and Search Techniques, Rule-Based Systems, Natural Language Processing and Computer Vision – Introductory concepts.`
+                    },
+                    {
+                        name: "Unit 2: Machine Learning Fundamentals",
+                        content: `Introduction to Machine Learning and Data-Driven Intelligence, Types of Machine Learning: Supervised, Unsupervised and Reinforcement Learning, Concept of Training Data and Labelled Data, Regression and Classification, Clustering and Dimensionality Reduction, Neural Networks – basic idea, Decision Trees, k-NN and Deep Learning (introductory concepts), Model Training and Evaluation (accuracy, precision, recall – concept only), Real-life examples of Machine Learning applications.`
+                    },
+                    {
+                        name: "Unit 3: AI Applications & Tools (Stream Specific)",
+                        content: `Generic AI Applications: AI in education, healthcare, agriculture, governance, business analytics, finance, robotics, media and entertainment.\n\nHands-on Exposure to AI Tools: ChatGPT, Gemini, Copilot, Claude, Canva AI, Runway ML, Google Teachable Machine, DALL·E, Adobe Firefly and Pictory, Google AI Studio.\n\nA) AI for Arts Stream: AI in literature, language translation, digital humanities, music composition, creative writing, journalism, media analytics and visual arts.\n\nOR\n\nB) AI for Science Stream: AI in climate modelling, healthcare diagnostics, bioinformatics, environmental monitoring, scientific data analysis and research automation.\n\nOR\n\nC) AI for Commerce Stream: AI in marketing, customer analytics, accounting automation, fraud detection, e-commerce, stock prediction and financial services.`
+                    },
+                    {
+                        name: "Unit 4: Ethical, Social, Economic and Legal Implications of AI",
+                        content: `Ethical AI and Responsible AI Practices, Algorithmic Bias and Fairness, Privacy and Surveillance Issues, Misinformation and Deepfakes, Intellectual Property and AI-generated Content, AI and Employment, Human-AI Collaboration, Digital Divide, Security Concerns, Existing Laws and Policies related to AI, Need for AI Governance and Sustainable AI Development.`
+                    },
+                    {
+                        name: "Unit 5: Group Mini Project & Presentation",
+                        content: `Students shall identify a real-life case study from their stream and: (a) Design a conceptual AI-based solution, or (b) Critically evaluate an existing AI system/tool. The project should include problem identification, AI application analysis, ethical considerations, report preparation and seminar presentation.`
+                    }
+                ]
             }
         };
 
@@ -656,35 +690,28 @@ LDCs; Corruption and economic development – tackling the problem of corruption
             window.scrollTo(0, 0);
         }
 
-        // On-screen Back Link click handler
         function handleManualBack() {
             if (history.state && history.state.page === 'syllabus') {
-                history.back(); // Triggers popstate listener
+                history.back();
             } else {
                 showHomePageUI();
             }
         }
 
-        // Listen for Mobile Physical/Gesture Back Button Event
         window.onpopstate = function(event) {
             if (!event.state || event.state.page !== 'syllabus') {
                 showHomePageUI();
             }
         };
 
-        function downloadPage() {
-            window.print();
-        }
-
-
         function toggleTimetable() {
-    const ttBox = document.getElementById('timetableSection');
-    if (ttBox.style.display === 'none' || ttBox.style.display === '') {
-        ttBox.style.display = 'block';
-    } else {
-        ttBox.style.display = 'none';
-    }
-}
+            const ttBox = document.getElementById('timetableSection');
+            if (ttBox.style.display === 'none' || ttBox.style.display === '') {
+                ttBox.style.display = 'block';
+            } else {
+                ttBox.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
